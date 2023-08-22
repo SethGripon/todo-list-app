@@ -26,7 +26,9 @@ const taskReducer = (state, action) => {
     case "DELETE_ALL_TASK":
       return (state = []);
     case "COMPLETE_FINISHED_TASK":
-      return state.map((task) => task.checked == false ? { ...task, checked: true } : task);
+      return state.map((task) =>
+        task.checked == false ? { ...task, checked: true } : task
+      );
     case "TOGGLE_TASK":
       return state.map((task) =>
         task.id === action.id ? { ...task, edited: !task.edited } : task
@@ -74,14 +76,16 @@ function App() {
   };
 
   const handleDeleteAll = () => {
-    return (
-      confirm("Are you sure you want to delete all task?") &&
-      dispatch({ type: "DELETE_ALL_TASK" })
-    );
+    return taskList.length
+      ? confirm("Are you sure you want to delete all task?") &&
+          dispatch({ type: "DELETE_ALL_TASK" })
+      : alert("No task to be deleted");
   };
 
   const handleCheckedAll = () => {
-    dispatch({ type: "COMPLETE_FINISHED_TASK" })
+    return taskList.length
+      ? dispatch({ type: "COMPLETE_FINISHED_TASK" })
+      : alert("No task to be checked");
   };
 
   const handleToggle = (id) => {
@@ -133,10 +137,7 @@ function App() {
             >
               Delete All Tasks
             </button>
-            <button
-              className="check-button"
-              onClick={handleCheckedAll}
-            >
+            <button className="check-button" onClick={handleCheckedAll}>
               Check All Tasks
             </button>
           </div>

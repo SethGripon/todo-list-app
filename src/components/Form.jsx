@@ -15,7 +15,7 @@ const Form = ({ addTask }) => {
   return (
     <div className="form-task">
       <h1 className="form-title">What tasks do you have?</h1>
-      <form className="row w-100 form-container" onSubmit={handleSubmit}>
+      <form className="row w-100 form-container" autoComplete="off" onSubmit={handleSubmit}>
         <div className="col-8 p-0 ">
           <label htmlFor="task-name">Task Name</label>
           <br />
